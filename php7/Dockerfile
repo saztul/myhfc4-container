@@ -24,3 +24,4 @@ RUN chmod +x /usr/local/bin/runner.sh \
     && chmod 0644 /etc/cron.d/* \
     && a2enmod vhost_alias
 
+EXPOSE 80
