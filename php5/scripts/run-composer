@@ -6,6 +6,7 @@ SSH_KEY_FILE=$2
 if [ -f "$SSH_KEY_FILE" ]
 then
   echo "Using key file '$SSH_KEY_FILE'"
+  mkdir -p /var/www/.ssh/
   cp "$SSH_KEY_FILE" /var/www/.ssh/id_rsa
   ssh-keyscan -H gitlab.hfci.de >> /var/www/.ssh/known_hosts
   chmod 700 /var/www/.ssh
