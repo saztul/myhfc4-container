@@ -10,7 +10,7 @@ echo "Generating vhosts for '$1' ..."
 CLIENT_PATH=`printf "%q" "/var/www/domains/myhfc/clients/$1"`
 CLIENT_NAME=`printf "%q" "$1"`
 
-cd $CLIENT_PATH
+cd '/var/www/domains/myhfc/clients/'
 
 shift
 while test $# -gt 0
