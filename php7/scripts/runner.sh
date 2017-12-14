@@ -7,6 +7,7 @@ fi
 
 # add dns entries for all apache vhosts
 echo "127.0.0.1 client.container myhfc.container scripts.container" >> /etc/hosts
+echo "127.0.0.1 $VIRTUAL_HOST" | tr ',' ' ' >> /etc/hosts
 
 # remove apache pid from previous run
 rm -f /var/run/apache2/apache2.pid
