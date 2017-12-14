@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# find all config folders and delete them
+find /var/www/config/*/ -type d -print0 | xargs -0 rm -rf

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# set user and group to www-data
+chown -R www-data:www-data /var/www
+
+# set directory permissions to drwxr-xr-x
+find /var/www -type d -print0 | xargs -0 chmod 755
+
+# set file permissions to -rw-r--r--
+find /var/www -type f -print0 | xargs -0 chmod 644

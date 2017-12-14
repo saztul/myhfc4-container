@@ -18,9 +18,9 @@ RUN sed -i '/de_DE/s/^# //' /etc/locale.gen \
 ADD ./php/* /etc/php/5.6/apache2/conf.d/
 ADD ./vhosts/* /etc/apache2/sites-enabled/
 ADD ./supervisor.conf /etc/supervisord.conf
-ADD ./runner.sh /usr/local/bin/runner.sh
+ADD ./scripts/* /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/runner.sh \
+RUN chmod +x /usr/local/bin/* \
     && chmod 0644 /etc/cron.d/* \
     && a2enmod vhost_alias
 

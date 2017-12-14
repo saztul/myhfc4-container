@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if (( $# < 2 )); then
+  echo "usage $0 myhfc-client-folder vhost.example.org vhost.example.com ..."
+  echo "myhfc-client-folder must be a folder inside of /var/www/domains/myhfc/clients"
+  exit 1
+fi
+
+echo "Generating vhosts for '$1' ..."
+CLIENT_PATH=`printf "%q" "/var/www/domains/myhfc/clients/$1"`
+CLIENT_NAME=`printf "%q" "$1"`
+
+cd $CLIENT_PATH
+
+shift
+while test $# -gt 0
+do
+  VHOST_NAME=`printf "%q" "$1"`
+  echo "  -> $VHOST_NAME"
+  ln -s "$CLIENT_NAME" "$VHOST_NAME"
+  shift
+done
