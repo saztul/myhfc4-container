@@ -1,0 +1,26 @@
+#!/bin/bash
+
+COMPOSER_DIR=$1
+SSH_KEY_FILE=$2
+
+if [ -f "$SSH_KEY_FILE" ]
+then
+  echo "Using key file '$SSH_KEY_FILE'"
+  cp "$SSH_KEY_FILE" /var/www/.ssh/id_rsa
+  ssh-keyscan -H gitlab.hfci.de >> /var/www/.ssh/known_hosts
+  chmod 700 /var/www/.ssh
+  chmod -R 600 /var/www/.ssh/*
+  chown -R www-data:www-data /var/www/.ssh/
+fi
+
+if [ -d "$COMPOSER_DIR" ]
+then
+  cd "$COMPOSER_DIR"
+  echo "Running 'composer install' in '$(pwd)'"
+  sudo -u www-data composer install
+fi
+
+if [ -d "/var/www/.ssh" ]
+then
+  rm -rf /var/www/.ssh
+fi
