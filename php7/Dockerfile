@@ -15,6 +15,16 @@ RUN sed -i '/de_DE/s/^# //' /etc/locale.gen \
     && mkdir -p /var/www/logs/system \
     && touch /var/log/cron.log
 
+# added libssl-dev=1.0.2g-1ubuntu4.10 to fix wkhtmltopdf ssl problems
+# https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001
+RUN wget https://downloads.wkhtmltopdf.org/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    tar xvf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz && \
+    mkdir -p /opt/bin && \
+    mv wkhtmltox/bin/wkhtmlto* /opt/bin/ && \
+    apt-get update && \
+    apt-get install -y libssl-dev=1.0.2g-1ubuntu4.10 && \
+    apt-mark hold libssl-dev
+
 ADD ./php/* /etc/php/7.0/apache2/conf.d/
 ADD ./vhosts/* /etc/apache2/sites-enabled/
 ADD ./supervisor.conf /etc/supervisord.conf
